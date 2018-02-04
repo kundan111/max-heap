@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include<climits>
+#include <assert.h>
 using namespace std;
 
 void max_heapify(int *A , int i , int heap_size)
@@ -53,6 +54,11 @@ int heap_extract_max(int *A , int heap_size){
     return max;
     
 }
+
+void delete_key(int *A , int posn_of_key_to_be_deleted , int heap_size){
+	 increase_key(A , posn_of_key_to_be_deleted , INT_MAX);
+	 heap_extract_max(A , heap_size);
+}
 int main(){
 	
     int heap_size;
@@ -69,9 +75,9 @@ int main(){
     int posn_of_key_to_be_deleted;
     cin >> posn_of_key_to_be_deleted;
     
-    increase_key(arr , posn_of_key_to_be_deleted , INT_MAX);
     
-    heap_extract_max(arr , heap_size);
+    assert(posn_of_key_to_be_deleted <= heap_size-1);
+    delete_key(arr , posn_of_key_to_be_deleted , heap_size);
     
     for(int i = 0 ; i < heap_size-1 ; i++)
            cout << arr[i] << " ";
